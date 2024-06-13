@@ -1,0 +1,18 @@
+.autocomplete-dropdown {
+    position: absolute;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: white;
+    z-index: 1000;
+  }
+  
+  .autocomplete-dropdown li {
+    padding: 8px;
+    cursor: pointer;
+  }
+  
+  .autocomplete-dropdown li:hover {
+    background-color: #f0f0f0;
+  }
+  

@@ -1,0 +1,32 @@
+{
+    "manifest_version": 3,
+    "name": "Patient Details Autocomplete",
+    "version": "1.0",
+    "description": "Shows a dropdown autocomplete for a textarea input field with a list of medicines.",
+    "permissions": ["activeTab"],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"]
+        
+      }
+    ],
+    "web_accessible_resources": [
+      {
+        "resources": ["medicines.json"],
+        "matches": ["<all_urls>"]
+      }
+    ],
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "16": "pdicon.png",
+        "48": "pdicon.png",
+        "128": "pdicon.png"
+      }
+    }
+  }
+  
