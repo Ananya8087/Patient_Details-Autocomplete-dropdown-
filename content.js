@@ -46,52 +46,41 @@ fetch(chrome.runtime.getURL('medicines.json'))
             console.log('Dropdown positioned');
         }
 
+        // Function to handle showing dropdown
+        function showDropdown(inputField, query = '') {
+            if (!inputField.matches('input[data-v-d19b1848].p-inputtext.p-component.subm_field.form-control')) {
+                return; // Exit if input field doesn't match selector
+            }
+
+            console.log('Show dropdown for input field:', inputField);
+            createDropdown(inputField, query);
+        }
+
         // Add event listener to handle input events
         document.addEventListener('input', function(event) {
             const inputField = event.target;
-
-            // Check if the input field matches the specific selector criteria
-            if (inputField.matches('input[data-v-d19b1848].p-inputtext.p-component.subm_field.form-control')) {
-                console.log('Input event detected');
-                const query = inputField.value.toLowerCase().trim();
-                console.log('Query:', query);
-                createDropdown(inputField, query);
-            }
+            showDropdown(inputField, inputField.value.toLowerCase().trim());
         });
 
         // Add event listener to handle focus events
         document.addEventListener('focusin', function(event) {
             const inputField = event.target;
-
-            // Check if the input field matches the specific selector criteria
-            if (inputField.matches('input[data-v-d19b1848].p-inputtext.p-component.subm_field.form-control')) {
-                console.log('Focus event detected');
-                createDropdown(inputField, ''); // Pass an empty string to show all options
-            }
+            showDropdown(inputField, '');
         });
 
-        // Add event listener to handle clicks on the document
-        document.addEventListener('mousedown', function(event) {
+        // Handle clicks on the document to keep dropdown open
+        document.addEventListener('click', function(event) {
             const target = event.target;
-            console.log('Document mousedown event:', target);
-
-            // Check if the click target is the specific input field or an item in the dropdown
             const isInputField = target.matches('input[data-v-d19b1848].p-inputtext.p-component.subm_field.form-control');
             const isDropdownItem = target.closest('.autocomplete-dropdown li');
 
-            console.log('Is input field:', isInputField);
-            console.log('Is dropdown item:', isDropdownItem);
-
-            // If neither the specific input field nor the dropdown item was clicked, remove the dropdown
             if (!isInputField && !isDropdownItem) {
-                console.log('Click outside input field and dropdown, removing dropdown');
+                // Clicked outside input field and dropdown
                 const dropdowns = document.querySelectorAll('.autocomplete-dropdown');
                 dropdowns.forEach(dropdown => {
-                    dropdown.remove(); // Remove the dropdown
+                    dropdown.remove(); // Remove all dropdowns
                     console.log('Dropdown removed');
                 });
-            } else {
-                console.log('Click inside input field or dropdown item, not removing dropdown');
             }
         });
 
