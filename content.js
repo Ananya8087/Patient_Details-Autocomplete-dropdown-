@@ -48,6 +48,12 @@ fetch(chrome.runtime.getURL('medicines.json'))
 
         // Function to handle showing dropdown
         function showDropdown(inputField, query = '') {
+            // Exclude input fields with specific placeholders
+            if (inputField.placeholder === 'enter amount') {
+                console.log('Input field with placeholder "enter amount" detected, skipping dropdown.');
+                return;
+            }
+
             if (!inputField.matches('input[data-v-d19b1848].p-inputtext.p-component.subm_field.form-control')) {
                 return; // Exit if input field doesn't match selector
             }
