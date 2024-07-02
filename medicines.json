@@ -8,6 +8,13 @@
      "Suite",
      "day care",
      "general ward",
-     "icu"
+     "icu",
+     "private",
+     "semi private",
+     "single",
+     "executive",
+     "NICU",
+     "MICU"
+    
 
 ]
