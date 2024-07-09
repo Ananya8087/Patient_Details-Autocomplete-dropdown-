@@ -54,7 +54,7 @@ fetch(chrome.runtime.getURL('medicines.json'))
                 return;
             }
 
-            if (!inputField.matches('input[data-v-d19b1848].p-inputtext.p-component.subm_field.form-control')) {
+            if (!inputField.matches('div[data-v-524dcdd3] > div[data-v-524dcdd3].spaced-form-group.p-fluid.p-formgrid.p-grid > div[data-v-524dcdd3].p-field.p-col > label[data-v-524dcdd3].field_label[for="firstname"] + input[data-v-524dcdd3].p-inputtext.p-component.subm_field.form-control')) {
                 return; // Exit if input field doesn't match selector
             }
 
@@ -77,8 +77,12 @@ fetch(chrome.runtime.getURL('medicines.json'))
         // Handle clicks on the document to keep dropdown open
         document.addEventListener('click', function(event) {
             const target = event.target;
-            const isInputField = target.matches('input[data-v-d19b1848].p-inputtext.p-component.subm_field.form-control');
+            const isInputField = target.matches('div[data-v-524dcdd3] > div[data-v-524dcdd3].spaced-form-group.p-fluid.p-formgrid.p-grid > div[data-v-524dcdd3].p-field.p-col > label[data-v-524dcdd3].field_label[for="firstname"] + input[data-v-524dcdd3].p-inputtext.p-component.subm_field.form-control');
+            console.log(isInputField);
+            console.log(target);
+
             const isDropdownItem = target.closest('.autocomplete-dropdown li');
+            console.log('isDropdownItem:', isDropdownItem);
 
             if (!isInputField && !isDropdownItem) {
                 // Clicked outside input field and dropdown
@@ -87,6 +91,8 @@ fetch(chrome.runtime.getURL('medicines.json'))
                     dropdown.remove(); // Remove all dropdowns
                     console.log('Dropdown removed');
                 });
+            } else {
+                console.log('Clicked inside input field or dropdown item');
             }
         });
 
